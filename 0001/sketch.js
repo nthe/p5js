@@ -33,7 +33,7 @@ function draw(){
 
 function mousePressed(){ ATTRACT = false; }
 function mouseReleased(){ ATTRACT = true; }
-function keyPressed(){
+function keyPressed(key){
   switch(key){
     case 'a': FROZEN = !FROZEN; break;
     case 's': SHOW_CLOUD = !SHOW_CLOUD; break;
