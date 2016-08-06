@@ -25,7 +25,7 @@ function Particle(x, y) {
   this.history = [];
 
   this.update = function() {
-    this.pos.add(this.vel.add(noise(this.nf) * 0.07));
+    this.pos.add(this.vel.rotate(noise(this.nf) * 0.07));
     this.nf += 0.00174;
 
     this.avg = createVector(0, 0);
