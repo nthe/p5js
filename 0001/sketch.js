@@ -1,7 +1,7 @@
 
-var PARTICLE_COUNT = 50;
+var PARTICLE_COUNT = 200;
 var CONNECTIONS = PARTICLE_COUNT / 100;
-var ATTRACT = true, FROZEN = false, SHOW_CLOUD = true, SHOW_CONNECTIONS = true;
+var ATTRACT = true, FROZEN = false, SHOW_CLOUD = true, SHOW_CONNECTIONS = false;
 var EASING = 0.85;
 var swarm = [];
 
