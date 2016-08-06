@@ -19,7 +19,7 @@ function draw() {
 }
 
 function Particle(x, y) {
-  this.pos = createVector(windowWidth/2, windowHeight/2);
+  this.pos = createVector(touchX, touchY);
   this.vel = createVector(random(-4, 4), random(-4, 4));
   this.nf = random(0, 1000.);
   this.history = [];
