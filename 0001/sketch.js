@@ -19,7 +19,7 @@ function setup(){
 }
 
 function draw(){
-  background(250);
+  background(220);
   fill(50, 50, 50, 100);
   noFill();
   if (SHOW_CLOUD) {
