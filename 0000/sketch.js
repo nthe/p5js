@@ -4,54 +4,52 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   background(250);
   noFill();
+  stroke(20);
+  textSize(14);
 }
 
 function mousePressed() {
   particles.push(new Particle(mouseX, mouseY));
+  if(particles.length > 5) particles.splice(0, 1);
 }
 
 function draw() {
-  // background(250);
+  noFill();
+  stroke(20);
+  background(250, 20);
   for (var i = 0; i < particles.length; i++) {
     particles[i].update();
     particles[i].show();
   }
+  fill(20);
+  noStroke();
+  text("click to add smoke chain", 20, height - 30);
 }
 
 function Particle(x, y) {
   this.pos = createVector(touchX, touchY);
-  this.vel = createVector(random(-4, 4), random(-4, 4));
-  this.nf = random(0, 1000.);
   this.history = [];
+  this.closeup = false;
 
   this.update = function() {
-    this.pos.add(this.vel.rotate(noise(this.nf) * 0.07));
-    this.nf += 0.00174;
-
-    this.avg = createVector(0, 0);
+    this.pos.x = touchX;
+    this.pos.y = touchY;
 
     for (var i = 0; i < this.history.length; i++) {
       this.history[i].x += random(-1, 1);
-      this.history[i].y += random(-1, 1);
-      this.avg.x += this.history[i].x;
-      this.avg.y += this.history[i].y;
+      this.history[i].y += random(-1 , 1);
     }
 
-    this.alpha = this.avg.div(this.history.length).dist(createVector(this.x, this.y));
-    if(this.alpha > 150) this.alpha = 150;
-
-    var v = createVector(this.pos.x, this.pos.y);
-    this.history.push(v);
-    if (this.history.length > 20) {
+    this.history.push(this.pos.copy());
+    if (this.history.length > 50) {
       this.history.splice(0, 1);
     }
   }
 
   this.show = function() {
-    stroke(200 - this.alpha);
     beginShape();
     for (var i = 0; i < this.history.length; i++) {
-      var pos = this.history[i];
+      pos = this.history[i];
       curveVertex(pos.x, pos.y);
     }
     endShape();
