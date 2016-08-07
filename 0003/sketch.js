@@ -5,7 +5,7 @@ var ns = null;
 
 function setup(){
   createCanvas(windowWidth, windowHeight);
-  stroke(50, 100);
+  stroke(50, 50);
   smooth(2);
   frameRate(33);
   strokeWeight(1.5);
@@ -15,7 +15,7 @@ function setup(){
 
 function draw(){
   if(ns.nodes.length < ns.nodes_count){
-    ns.grow(random(windowWidth * 0.95), windowHeight + 100 - (ns.nodes.length * 22));
+    ns.grow(random(-10, windowWidth * 0.85), windowHeight + 100 - (ns.nodes.length * 22));
   } else {
     ns.render();
     noLoop();
