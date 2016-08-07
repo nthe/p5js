@@ -1,65 +1,57 @@
 
-var easing = 0.05;
-var max_velocity = 1.
-var ns = null;
+
+var n = null;
+var mouse_pos = null;
+var easing = .05;
+var max_velocity = 5.;
+var init = false;
 
 function setup(){
+  noFill();
+  mouse_pos = createVector(touchX, touchY);
   createCanvas(windowWidth, windowHeight);
-  stroke(50, 50);
-  smooth(2);
-  frameRate(33);
-  strokeWeight(1.5);
+  stroke(50);
+  // frameRate(50);
+  n = new Node(createVector(windowWidth / 2, windowHeight / 2));
   background(250);
-  ns = new NodeSystem(50);
 }
 
 function draw(){
-  if(ns.nodes.length < ns.nodes_count){
-    ns.grow(random(-10, windowWidth * 0.85), windowHeight + 100 - (ns.nodes.length * 22));
+  if(init){
+    background(250);
+    n.update();
+    if(n.pos.dist(mouse_pos) < .5){
+      noLoop();
+    }
   } else {
-    ns.render();
-    noLoop();
+
+      ellipse(windowWidth / 2, windowHeight / 2, 10, 10);
+    // noLoop();
   }
+}
+
+function mouseMoved(){
+  // if(!init) init = !init;
+  init = true;
+  redraw();
 }
 
 function windowResized(){
-  resizeCanvas(windowWidth * 0.2, windowHeight);
+  resizeCanvas(windowWidth, windowHeight);
   background(250);
 }
 
-function NodeSystem(_nodes_count){
-  this.nodes = []
-  this.nodes_count = _nodes_count;
-
-  this.grow = function(_x, _y){
-    this.nodes.push(new Node(createVector(_x, _y)));
-    this.render();
-  }
-
-  var dist = 0;
-
-  this.render = function(){
-    for(var i = 0; i < this.nodes.length; i++){
-      for(var j = 0; j < this.nodes.length; j++){
-        this.nodes[j].pos.x += random(-1, 1);;
-        dist = this.nodes[i].pos.dist(this.nodes[j].pos);
-        if(dist < 110){
-          line(this.nodes[i].pos.x, this.nodes[i].pos.y, this.nodes[j].pos.x, this.nodes[j].pos.y);
-        }
-        if(dist < 30 & i != j){
-          this.nodes[i].pos.rotate(PI/4);
-        }
-      }
-    }
-  }
-}
 
 function Node(_v){
   this.pos = _v;
-  this.vel = createVector(random(-1, 1), random(-1, 1));
+  this.vel = createVector(0, 0);
 
   this.update = function(){
+    mouse_pos.x = touchX;
+    mouse_pos.y = touchY;
+    this.vel = p5.Vector.sub(mouse_pos, this.pos).mult(easing);
     this.vel.limit(max_velocity);
-    this.pos.add(this.vel * easing);
+    this.pos.add(this.vel);
+    ellipse(this.pos.x, this.pos.y, 10, 10);
   }
 }
