@@ -4,7 +4,7 @@ var max_velocity = 1.
 var ns = null;
 
 function setup(){
-  createCanvas(windowWidth * 0.2, windowHeight);
+  createCanvas(windowWidth, windowHeight);
   stroke(50, 100);
   smooth(2);
   frameRate(33);
@@ -15,7 +15,7 @@ function setup(){
 
 function draw(){
   if(ns.nodes.length < ns.nodes_count){
-    ns.grow(random(windowWidth * 0.18), windowHeight + 100 - (ns.nodes.length * 22));
+    ns.grow(random(windowWidth * 0.95), windowHeight + 100 - (ns.nodes.length * 22));
   } else {
     ns.render();
     noLoop();
