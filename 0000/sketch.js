@@ -2,7 +2,7 @@ var particles = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  background(250);
+  background(255);
   noFill();
   stroke(20);
   textSize(14);
@@ -16,7 +16,7 @@ function mousePressed() {
 function draw() {
   noFill();
   stroke(20);
-  background(250, 20);
+  background(255, 20);
   for (var i = 0; i < particles.length; i++) {
     particles[i].update();
     particles[i].show();

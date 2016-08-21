@@ -9,7 +9,7 @@ function setup(){
 }
 
 function draw(){
-  background(250);
+  background(255);
   noFill();
   for(var y = 0; y < 20; y++){
     a += 0.3165;
